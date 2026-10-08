@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>レシート精算</title>
+<!-- ホーム画面に追加したときのアイコンと名前 -->
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="180x180" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<meta name="apple-mobile-web-app-title" content="レシート精算">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#2f5d50">
+<!-- URLの鍵が他サイトへ送られないようにする -->
+<meta name="referrer" content="no-referrer">
+<style>
+  html, body { margin: 0; height: 100%; background: #f6f6f3; }
+  iframe { border: 0; width: 100%; height: 100%; display: block; }
+  .msg { font-family: -apple-system, sans-serif; padding: 24px; color: #333; }
+</style>
+</head>
+<body>
+<script>
+  // アプリ本体（Apps Scriptのウェブアプリ）。アクセス用の鍵（?k=...）はこのファイルには書かず、
+  // 開いたURLの ?k=...&p=... をそのまま中に渡す。
+  var APP = 'https://script.google.com/macros/s/AKfycbzDKane4sxVtSfwDgnrJ-BmOh6nRDS1I8teqDUQbUw2FAFOmXzqwcY5U4tQqfivFght/exec';
+  var q = location.search;
+  if (!/[?&]k=/.test(q)) {
+    document.body.innerHTML = '<p class="msg">URLが正しくありません。共有されたURLから開いてください。</p>';
+  } else {
+    var f = document.createElement('iframe');
+    f.src = APP + q;
+    f.allow = 'camera; clipboard-write';
+    f.referrerPolicy = 'no-referrer';
+    f.title = 'レシート精算';
+    document.body.appendChild(f);
+  }
+</script>
+</body>
+</html>
